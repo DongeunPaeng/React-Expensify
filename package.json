@@ -5,7 +5,6 @@
   "author": "Dongeun Paeng",
   "license": "MIT",
   "scripts": {
-    "serve": "live-server public/",
     "build:dev": "webpack",
     "build:prod": "webpack -p --env production",
     "dev-server": "webpack-dev-server",
@@ -21,11 +20,7 @@
     "@babel/preset-react": "^7.10.4",
     "babel-loader": "^8.1.0",
     "css-loader": "^4.2.2",
-    "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.5",
-    "enzyme-to-json": "^3.6.1",
     "express": "^4.17.1",
-    "live-server": "^1.2.1",
     "luxon": "^1.25.0",
     "mini-css-extract-plugin": "^1.2.0",
     "node-sass": "^4.14.1",
@@ -36,18 +31,21 @@
     "react-modal": "^3.11.2",
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
-    "react-test-renderer": "^16.13.1",
     "redux": "^4.0.5",
     "rsuite": "^4.8.2",
     "sass-loader": "^10.0.2",
     "style-loader": "^1.2.1",
     "uuid": "^8.3.0",
     "validator": "^13.1.1",
-    "webpack": "^4.44.1",
-    "webpack-dev-server": "^3.11.0"
+    "webpack": "^4.44.1"
   },
   "devDependencies": {
     "jest": "^26.4.2",
-    "webpack-cli": "^3.3.12"
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0",
+    "react-test-renderer": "^16.13.1",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.5",
+    "enzyme-to-json": "^3.6.1"
   }
 }
