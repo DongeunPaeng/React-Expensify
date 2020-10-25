@@ -25,6 +25,7 @@
     "mini-css-extract-plugin": "^1.2.0",
     "node-sass": "^4.14.1",
     "normalize.css": "^8.0.1",
+    "numeral": "^2.0.6",
     "raf": "^3.4.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -40,12 +41,12 @@
     "webpack": "^4.44.1"
   },
   "devDependencies": {
-    "jest": "^26.4.2",
-    "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0",
-    "react-test-renderer": "^16.13.1",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.5",
-    "enzyme-to-json": "^3.6.1"
+    "enzyme-to-json": "^3.6.1",
+    "jest": "^26.4.2",
+    "react-test-renderer": "^16.13.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
   }
 }

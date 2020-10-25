@@ -9,8 +9,9 @@ exports[`should render ExpenseListItem correctly 1`] = `
   </Link>
   <p>
     195
-     - 
-    0
+    원 -
+     
+    1970. 1. 1.
   </p>
 </div>
 `;
