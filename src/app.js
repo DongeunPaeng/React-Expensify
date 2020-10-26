@@ -6,6 +6,7 @@ import configureStore from "./store/configureStore";
 import "rsuite/dist/styles/rsuite-default.css";
 import "normalize.css/normalize.css";
 import "./styles/styles.scss";
+import "./firebase/firebase";
 
 const store = configureStore();
 
