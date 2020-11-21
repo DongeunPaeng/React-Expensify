@@ -17,10 +17,10 @@ const jsx = (
 );
 
 // for the test purpose...
-import { addExpense } from "./actions/expenses";
+// import { addExpense } from "./actions/expenses";
 
-store.dispatch(addExpense({ description: "water bill", amount: 45000 }));
-store.dispatch(addExpense({ description: "gas bill", createdAt: 1000 }));
-store.dispatch(addExpense({ description: "rent", amount: 109500 }));
+// store.dispatch(addExpense({ description: "water bill", amount: 45000 }));
+// store.dispatch(addExpense({ description: "gas bill", createdAt: 1000 }));
+// store.dispatch(addExpense({ description: "rent", amount: 109500 }));
 
 ReactDOM.render(jsx, document.getElementById("app"));

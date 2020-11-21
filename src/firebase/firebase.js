@@ -16,19 +16,19 @@ firebase.initializeApp(firebaseConfig);
 
 const db = firebase.firestore();
 
-const notes = {
-  1: {
-    id: "12",
-    title: "First note!",
-    body: "This is my note"
-  },
-  2: {
-    id: "384734",
-    title: "Second note!",
-    body: "This is my note"
-  }
-};
+export { firebase, db as default };
 
-db.collection("database")
-  .doc("notes")
-  .set(notes);
+// READ
+// db.collection("expenses")
+//   .get()
+//   .then(snapshot => {
+//     snapshot.docs.forEach(doc => {
+//       console.log(doc.data());
+//     });
+//   });
+//
+// // CREATE
+// db.collection("expenses").add({
+//   name: "car",
+//   amount: 750000
+// });

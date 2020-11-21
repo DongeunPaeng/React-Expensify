@@ -71,7 +71,7 @@ test("should call onSubmit prop for valid form submission", () => {
   expect(onSubmitSpy).toHaveBeenLastCalledWith({
     description: expenses[0].description,
     amount: expenses[0].amount,
-    note: expenses[0].note,
+    notes: expenses[0].note,
     createdAt: DateTime.fromMillis(expenses[0].createdAt)
   });
 });

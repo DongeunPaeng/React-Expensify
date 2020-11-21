@@ -1,21 +1,37 @@
-import {v4 as uuid} from 'uuid';
+import db from "../firebase/firebase";
 
 // ADD_EXPENSE
-export const addExpense = ({
-  description = "",
-  notes = "",
-  amount = 0,
-  createdAt = 0
-} = {}) => ({
+export const addExpense = expense => ({
   type: "ADD_EXPENSE",
-  expense: {
-    id: uuid(),
-    description,
-    notes,
-    amount,
-    createdAt
-  }
+  expense
 });
+
+// ASYNC ACTION (that returns a function that dispatches another function that returns the final object)
+export const startAddExpense = (expenseData = {}) => {
+  return async dispatch => {
+    const {
+      description = "",
+      notes = "",
+      amount = 0,
+      createdAt = 0
+    } = expenseData;
+
+    // ADD EXPENSE TO FIRESTORE
+    const expense = { description, notes, amount, createdAt };
+
+    await db
+      .collection("expenses")
+      .add(expense)
+      .then(doc => {
+        dispatch(
+          addExpense({
+            id: doc.id,
+            ...expense
+          })
+        );
+      });
+  };
+};
 
 // REMOVE_EXPENSE
 export const removeExpense = ({ id } = {}) => ({
