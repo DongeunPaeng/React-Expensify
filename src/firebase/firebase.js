@@ -17,18 +17,3 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
 export { firebase, db as default };
-
-// READ
-// db.collection("expenses")
-//   .get()
-//   .then(snapshot => {
-//     snapshot.docs.forEach(doc => {
-//       console.log(doc.data());
-//     });
-//   });
-//
-// // CREATE
-// db.collection("expenses").add({
-//   name: "car",
-//   amount: 750000
-// });
