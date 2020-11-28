@@ -44,10 +44,13 @@ test("should setup addExpense action object with provided values", () => {
   });
 });
 
+let docId;
+
 test("should add expense to database and store", (done) => {
   const store = createMockStore({});
   store.dispatch(startAddExpense(expenseData)).then(() => {
     const actions = store.getActions();
+    docId = actions[0].expense.id;
     expect(actions[0]).toEqual({
       type: "ADD_EXPENSE",
       expense: {
@@ -63,11 +66,10 @@ test("should add expense to database", async () => {
   let emptyArray = [];
   await db
     .collection("expenses")
+    .doc(docId)
     .get()
-    .then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        emptyArray.push(doc.data());
-      });
+    .then((doc) => {
+      emptyArray.push(doc.data());
     });
   expect(emptyArray[0]).toEqual(expenseData);
 });
