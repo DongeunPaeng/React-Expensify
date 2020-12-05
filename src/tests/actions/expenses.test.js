@@ -5,7 +5,8 @@ import {
   startAddExpense,
   addExpense,
   editExpense,
-  removeExpense
+  removeExpense,
+  setExpenses
 } from "../../actions/expenses";
 import expenses from "../fixtures/expenses";
 import db from "../../firebase/firebase";
@@ -72,4 +73,12 @@ test("should add expense to database", async () => {
       emptyArray.push(doc.data());
     });
   expect(emptyArray[0]).toEqual(expenseData);
+});
+
+test("should setup set expenses", () => {
+  const action = setExpenses(expenseData);
+  expect(action).toEqual({
+    type: "SET_EXPENSES",
+    expenses: expenseData
+  });
 });
