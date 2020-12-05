@@ -1,6 +1,9 @@
 import * as firebase from "firebase/app";
 import "firebase/firestore";
 
+// TODO(dongeun.paeng): Without dotenv, the test fails with messages firebaseApp.options...
+// However, if I add dotenv here again, webpack spits 'redundant error' in forms of module not found: can't resolve 'fs''...
+
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY,
   authDomain: process.env.FIREBASE_AUTH_DOMAIN,
