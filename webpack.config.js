@@ -2,15 +2,7 @@ const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const webpack = require("webpack");
 
-process.env.NODE_ENV = process.env.NODE_ENV || "development";
-
-// if (process.env.NODE_ENV === "test") {
-//   require("dotenv").config({ path: ".env.test" });
-//   console.log("at WEBPACK test: ", process.env.FIREBASE_PROJECT_ID);
-// } else if (process.env.NODE_ENV === "development") {
-  require("dotenv").config({ path: ".env.development" });
-//   console.log("at WEBPACK dev: ", process.env.FIREBASE_PROJECT_ID);
-// }
+require("dotenv").config({ path: ".env.development" });
 
 module.exports = env => {
   const isProduction = env === "production";
