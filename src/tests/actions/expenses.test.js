@@ -5,7 +5,7 @@ import {
   startAddExpense,
   addExpense,
   editExpense,
-  removeExpense,
+  removeExpense
 } from "../../actions/expenses";
 import expenses from "../fixtures/expenses";
 import db from "../../firebase/firebase";
@@ -13,17 +13,17 @@ import db from "../../firebase/firebase";
 const createMockStore = configureMockStore([thunk]);
 
 const expenseData = {
-  description: "Mouse",
+  description: "TEST",
   amount: 100,
   createdAt: 1000,
-  notes: "Test directly with DB",
+  notes: "Test with test DB"
 };
 
 test("should setup removeExpense action object", () => {
   const action = removeExpense({ id: "123abc" });
   expect(action).toEqual({
     type: "REMOVE_EXPENSE",
-    id: "123abc",
+    id: "123abc"
   });
 });
 
@@ -32,7 +32,7 @@ test("should setup editExpense action object", () => {
   expect(action).toEqual({
     type: "EDIT_EXPENSE",
     id: "123abc",
-    updates: { notes: "New note value" },
+    updates: { notes: "New note value" }
   });
 });
 
@@ -40,13 +40,13 @@ test("should setup addExpense action object with provided values", () => {
   const action = addExpense(expenses[2]);
   expect(action).toEqual({
     type: "ADD_EXPENSE",
-    expense: expenses[2],
+    expense: expenses[2]
   });
 });
 
 let docId;
 
-test("should add expense to database and store", (done) => {
+test("should add expense to database and store", done => {
   const store = createMockStore({});
   store.dispatch(startAddExpense(expenseData)).then(() => {
     const actions = store.getActions();
@@ -55,8 +55,8 @@ test("should add expense to database and store", (done) => {
       type: "ADD_EXPENSE",
       expense: {
         id: expect.any(String),
-        ...expenseData,
-      },
+        ...expenseData
+      }
     });
     done();
   });
@@ -68,7 +68,7 @@ test("should add expense to database", async () => {
     .collection("expenses")
     .doc(docId)
     .get()
-    .then((doc) => {
+    .then(doc => {
       emptyArray.push(doc.data());
     });
   expect(emptyArray[0]).toEqual(expenseData);

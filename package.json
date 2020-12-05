@@ -9,7 +9,7 @@
     "build:prod": "webpack -p --env production",
     "dev-server": "webpack-dev-server",
     "test": "jest --env=node --NODE_ENV=test --config=jest.config.json",
-    "test-crossenv": "cross-env jest --NODE_ENV=test --config=jest.config.json",
+    "test-crossenv": "cross-env jest --env=node --NODE_ENV=test --config=jest.config.json",
     "start": "node server/server.js",
     "heroku-postbuild": "yarn build:prod"
   },
