@@ -1,5 +1,5 @@
 import configureMockStore from "redux-mock-store";
-import "babel-polyfill";
+import "@babel/polyfill";
 import thunk from "redux-thunk";
 import {
   startAddExpense,
