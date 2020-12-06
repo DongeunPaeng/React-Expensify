@@ -3,7 +3,7 @@
 exports[`should render ExpenseListItem correctly 1`] = `
 <div>
   <Link
-    to="/edit/1"
+    to="/edit/001"
   >
     test
   </Link>

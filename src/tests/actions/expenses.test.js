@@ -5,8 +5,7 @@ import {
   startAddExpense,
   addExpense,
   editExpense,
-  removeExpense,
-  setExpenses
+  removeExpense
 } from "../../actions/expenses";
 import expenses from "../fixtures/expenses";
 import db from "../../firebase/firebase";
@@ -19,6 +18,28 @@ const expenseData = {
   createdAt: 1000,
   notes: "Test with test DB"
 };
+
+beforeEach(() => {
+  expenses.forEach(({ id, description, amount, createdAt, notes }) => {
+    db.collection("expenses")
+      .doc(id)
+      .set({ description, amount, createdAt, notes });
+  });
+  db.collection("expenses")
+    .where("description", "==", "TEST")
+    .get()
+    .then(snapshot => {
+      snapshot.forEach(doc => {
+        console.log(doc.id, "=>", doc.data());
+        db.collection("expenses")
+          .doc(doc.id)
+          .delete();
+      });
+    })
+    .catch(err => {
+      console.log("error deleting docs...", err);
+    });
+});
 
 test("should setup removeExpense action object", () => {
   const action = removeExpense({ id: "123abc" });
@@ -49,7 +70,7 @@ let docId;
 
 test("should add expense to database and store", done => {
   const store = createMockStore({});
-  store.dispatch(startAddExpense(expenseData)).then(() => {
+  store.dispatch(startAddExpense(expenseData)).then(async () => {
     const actions = store.getActions();
     docId = actions[0].expense.id;
     expect(actions[0]).toEqual({
@@ -59,26 +80,15 @@ test("should add expense to database and store", done => {
         ...expenseData
       }
     });
+    let emptyArray = [];
+    await db.collection("expenses")
+      .doc(docId)
+      .get()
+      .then(doc => {
+        console.log('docDataToPush:', doc.data())
+        emptyArray.push(doc.data());
+      });
+    expect(emptyArray[0]).toEqual(expenseData);
     done();
-  });
-});
-
-test("should add expense to database", async () => {
-  let emptyArray = [];
-  await db
-    .collection("expenses")
-    .doc(docId)
-    .get()
-    .then(doc => {
-      emptyArray.push(doc.data());
-    });
-  expect(emptyArray[0]).toEqual(expenseData);
-});
-
-test("should setup set expenses", () => {
-  const action = setExpenses(expenseData);
-  expect(action).toEqual({
-    type: "SET_EXPENSES",
-    expenses: expenseData
   });
 });

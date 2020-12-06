@@ -8,8 +8,8 @@ exports[`should render EditExpensePage correctly 1`] = `
         "amount": 400,
         "createdAt": -500,
         "description": "card",
-        "id": "3",
-        "note": "",
+        "id": "003",
+        "notes": "",
       }
     }
     onSubmit={[Function]}
