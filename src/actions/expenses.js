@@ -45,3 +45,29 @@ export const editExpense = (id, updates) => ({
   id,
   updates
 });
+
+export const setExpenses = expenses => ({
+  type: "SET_EXPENSES",
+  expenses
+});
+
+export const startSetExpenses = () => {
+  return async dispatch => {
+    let expenses = [];
+    await db
+      .collection("expenses")
+      .get()
+      .then(snapshot => {
+        snapshot.forEach(doc => {
+          expenses.push({
+            id: doc.id,
+            ...doc.data()
+          });
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+    dispatch(setExpenses(expenses));
+  };
+};

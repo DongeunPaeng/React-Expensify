@@ -17,6 +17,8 @@ export default (state = expensesIntialState, action) => {
           return expense;
         }
       });
+    case 'SET_EXPENSES':
+      return action.expenses
     default:
       return state;
   }

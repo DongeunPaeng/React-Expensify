@@ -5,7 +5,9 @@ import {
   startAddExpense,
   addExpense,
   editExpense,
-  removeExpense
+  removeExpense,
+  setExpenses,
+  startSetExpenses
 } from "../../actions/expenses";
 import expenses from "../fixtures/expenses";
 import db from "../../firebase/firebase";
@@ -13,24 +15,40 @@ import db from "../../firebase/firebase";
 const createMockStore = configureMockStore([thunk]);
 
 const expenseData = {
-  description: "TEST",
+  description: "ADD_TEST",
   amount: 100,
   createdAt: 1000,
   notes: "Test with test DB"
 };
 
-beforeEach(() => {
+beforeEach(async () => {
   expenses.forEach(({ id, description, amount, createdAt, notes }) => {
     db.collection("expenses")
       .doc(id)
       .set({ description, amount, createdAt, notes });
   });
-  db.collection("expenses")
-    .where("description", "==", "TEST")
+  await db
+    .collection("expenses")
+    .where("description", "==", "ADD_TEST")
     .get()
     .then(snapshot => {
       snapshot.forEach(doc => {
-        console.log(doc.id, "=>", doc.data());
+        db.collection("expenses")
+          .doc(doc.id)
+          .delete();
+      });
+    })
+    .catch(err => {
+      console.log("error deleting docs...", err);
+    });
+});
+
+afterEach(() => {
+  db.collection("expenses")
+    .where("description", "==", "ADD_TEST")
+    .get()
+    .then(snapshot => {
+      snapshot.forEach(doc => {
         db.collection("expenses")
           .doc(doc.id)
           .delete();
@@ -81,14 +99,33 @@ test("should add expense to database and store", done => {
       }
     });
     let emptyArray = [];
-    await db.collection("expenses")
+    await db
+      .collection("expenses")
       .doc(docId)
       .get()
       .then(doc => {
-        console.log('docDataToPush:', doc.data())
         emptyArray.push(doc.data());
+      })
+      .catch(err => {
+        console.log(err);
       });
     expect(emptyArray[0]).toEqual(expenseData);
     done();
+  });
+});
+
+test("should setup set expense action object with data", () => {
+  const action = setExpenses(expenses[2]);
+  expect(action).toEqual({
+    type: "SET_EXPENSES",
+    expenses: expenses[2]
+  });
+});
+
+test("should fetch the expenses from database", () => {
+  const store = createMockStore({});
+  store.dispatch(startSetExpenses()).then(() => {
+    const actions = store.getActions();
+    expect(actions[0].expenses[0]).toEqual(expenses[0]);
   });
 });
