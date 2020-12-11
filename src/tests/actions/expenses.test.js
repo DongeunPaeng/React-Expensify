@@ -6,6 +6,7 @@ import {
   addExpense,
   editExpense,
   removeExpense,
+  startRemoveExpense,
   setExpenses,
   startSetExpenses
 } from "../../actions/expenses";
@@ -60,10 +61,32 @@ afterEach(() => {
 });
 
 test("should setup removeExpense action object", () => {
-  const action = removeExpense({ id: "123abc" });
+  const id = "123abc";
+  const action = removeExpense(id);
   expect(action).toEqual({
     type: "REMOVE_EXPENSE",
     id: "123abc"
+  });
+});
+
+test("should remove expense from database and store", done => {
+  const store = createMockStore({});
+  const id = expenses[0].id;
+  store.dispatch(startRemoveExpense(id)).then(async () => {
+    const actions = store.getActions();
+    expect(actions[0]).toEqual({
+      type: "REMOVE_EXPENSE",
+      id
+    });
+    await db
+      .collection("expenses")
+      .doc(id)
+      .get()
+      .then(doc => {
+        expect(doc.data()).toBeUndefined();
+        done();
+      })
+      .catch(err => done(err));
   });
 });
 
