@@ -7,6 +7,7 @@ import { startSetExpenses } from "./actions/expenses";
 import "rsuite/dist/styles/rsuite-default.css";
 import "normalize.css/normalize.css";
 import "./styles/styles.scss";
+import "./styles/styles.css";
 import "./firebase/firebase";
 
 const store = configureStore();
@@ -17,7 +18,7 @@ const jsx = (
   </Provider>
 );
 
-ReactDOM.render(<p>Loading...</p>, document.getElementById("app"));
+ReactDOM.render(<div className="spinner"></div>, document.getElementById("app"));
 store.dispatch(startSetExpenses()).then(() => {
   ReactDOM.render(jsx, document.getElementById("app"));
 });

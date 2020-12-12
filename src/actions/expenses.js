@@ -58,6 +58,18 @@ export const editExpense = (id, updates) => ({
   updates
 });
 
+export const startEditExpense = (id, updates) => {
+  return async dispatch => {
+    await db
+      .collection("expenses")
+      .doc(id)
+      .set(updates)
+      .then()
+      .catch(err => console.log(err));
+    dispatch(editExpense(id, updates));
+  };
+};
+
 export const setExpenses = expenses => ({
   type: "SET_EXPENSES",
   expenses

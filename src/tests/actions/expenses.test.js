@@ -5,6 +5,7 @@ import {
   startAddExpense,
   addExpense,
   editExpense,
+  startEditExpense,
   removeExpense,
   startRemoveExpense,
   setExpenses,
@@ -96,6 +97,30 @@ test("should setup editExpense action object", () => {
     type: "EDIT_EXPENSE",
     id: "123abc",
     updates: { notes: "New note value" }
+  });
+});
+
+test("should edit expense in database and store", done => {
+  const store = createMockStore({});
+  const id = expenses[0].id;
+  const updates = expenseData;
+  store.dispatch(startEditExpense(id, updates)).then(async () => {
+    const actions = store.getActions();
+    expect(actions[0]).toEqual({
+      type: "EDIT_EXPENSE",
+      id,
+      updates
+    });
+    await db
+      .collection("expenses")
+      .doc(id)
+      .get()
+      .then(doc => {
+        expect(doc.data().description).toBe("ADD_TEST");
+        console.log(doc.data().description);
+        done();
+      })
+      .catch(err => done(err));
   });
 });
 
