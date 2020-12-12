@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import AppRouter from "./routers/AppRouter";
+import AppRouter, { history } from "./routers/AppRouter";
 import { Provider } from "react-redux";
 import configureStore from "./store/configureStore";
 import { startSetExpenses } from "./actions/expenses";
@@ -26,13 +26,13 @@ store.dispatch(startSetExpenses()).then(() => {
   ReactDOM.render(jsx, document.getElementById("app"));
 });
 
-firebase.auth().onAuthStateChanged(user => {
+firebase.auth().onAuthStateChanged((user) => {
   if (user) {
     const name = user.displayName;
     const email = user.email;
     const emailVerified = user.emailVerified;
     console.log(name, email, emailVerified);
   } else {
-    console.log("there's not a user");
+    history.push("/");
   }
 });
