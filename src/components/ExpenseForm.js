@@ -6,11 +6,21 @@ export default class ExpenseForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      description: props.expense.description ? props.expense.description : "",
-      note: props.expense.note ? props.expense.note : "",
-      amount: props.expense.amount ? props.expense.amount : "",
-      createdAt: props.expense.createdAt
-        ? DateTime.fromMillis(props.expense.createdAt).ts
+      description: props.expense
+        ? props.expense.description
+          ? props.expense.description
+          : ""
+        : "",
+      note: props.expense ? (props.expense.note ? props.expense.note : "") : "",
+      amount: props.expense
+        ? props.expense.amount
+          ? props.expense.amount
+          : ""
+        : "",
+      createdAt: props.expense
+        ? props.expense.createdAt
+          ? DateTime.fromMillis(props.expense.createdAt).ts
+          : DateTime.local()
         : DateTime.local(),
       message: undefined
     };

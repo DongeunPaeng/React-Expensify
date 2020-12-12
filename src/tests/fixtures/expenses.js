@@ -4,7 +4,7 @@ const expenses = [
     description: "test01",
     notes: "",
     amount: 195,
-    createdAt: 0
+    createdAt: 10000
   },
   {
     id: "002",

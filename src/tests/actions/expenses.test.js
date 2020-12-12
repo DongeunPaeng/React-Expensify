@@ -117,7 +117,6 @@ test("should edit expense in database and store", done => {
       .get()
       .then(doc => {
         expect(doc.data().description).toBe("ADD_TEST");
-        console.log(doc.data().description);
         done();
       })
       .catch(err => done(err));
