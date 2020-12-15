@@ -9,7 +9,7 @@ export const addExpense = expense => ({
 // ASYNC ACTION (that returns a function that dispatches another function that returns the final object)
 export const startAddExpense = (expenseData = {}) => {
   return async (dispatch, getState) => {
-    const uid = getState().auth.uid; // TODO(dongeun.paeng): after installing thunk, we can access the methods of store.
+    const uid = getState().auth.uid;
     const {
       description = "",
       notes = "",
