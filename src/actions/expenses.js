@@ -8,7 +8,8 @@ export const addExpense = expense => ({
 
 // ASYNC ACTION (that returns a function that dispatches another function that returns the final object)
 export const startAddExpense = (expenseData = {}) => {
-  return async dispatch => {
+  return async (dispatch, getState) => {
+    const uid = getState().auth.uid; // TODO(dongeun.paeng): after installing thunk, we can access the methods of store.
     const {
       description = "",
       notes = "",
@@ -20,7 +21,7 @@ export const startAddExpense = (expenseData = {}) => {
     const expense = { description, notes, amount, createdAt };
 
     await db
-      .collection("expenses")
+      .collection(`users/${uid}/expenses`)
       .add(expense)
       .then(doc => {
         dispatch(
@@ -40,9 +41,10 @@ export const removeExpense = id => ({
 });
 
 export const startRemoveExpense = id => {
-  return async dispatch => {
+  return async (dispatch, getState) => {
+    const uid = getState().auth.uid;
     await db
-      .collection("expenses")
+      .collection(`users/${uid}/expenses`)
       .doc(id)
       .delete()
       .then()
@@ -59,9 +61,10 @@ export const editExpense = (id, updates) => ({
 });
 
 export const startEditExpense = (id, updates) => {
-  return async dispatch => {
+  return async (dispatch, getState) => {
+    const uid = getState().auth.uid;
     await db
-      .collection("expenses")
+      .collection(`users/${uid}/expenses`)
       .doc(id)
       .set(updates)
       .then()
@@ -76,10 +79,11 @@ export const setExpenses = expenses => ({
 });
 
 export const startSetExpenses = () => {
-  return async dispatch => {
+  return async (dispatch, getState) => {
+    const uid = getState().auth.uid;
     let expenses = [];
     await db
-      .collection("expenses")
+      .collection(`users/${uid}/expenses`)
       .get()
       .then(snapshot => {
         snapshot.forEach(doc => {
