@@ -1,6 +1,9 @@
 {
   "name": "boilerplate",
   "version": "1.0.0",
+  "engines": {
+    "node": "15.x"
+  },
   "main": "index.js",
   "author": "Dongeun Paeng",
   "license": "MIT",
