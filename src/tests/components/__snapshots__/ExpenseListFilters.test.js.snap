@@ -1,57 +1,99 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should render ExpenseListFilters alt data correctly 1`] = `
-<div>
-  <input
-    onChange={[Function]}
-    type="text"
-    value="bills"
-  />
-  <select
-    onChange={[Function]}
-    value="amount"
+<div
+  className="content-container"
+>
+  <div
+    className="input-group"
   >
-    <option
-      value="date"
+    <div
+      className="input-group__item"
     >
-      Date
-    </option>
-    <option
-      value="amount"
+      <input
+        className="text-input"
+        onChange={[Function]}
+        placeholder="Search Expenses"
+        type="text"
+        value="bills"
+      />
+    </div>
+    <div
+      className="input-group__item"
     >
-      Amount
-    </option>
-  </select>
-  <withLocale(defaultProps(DateRangePicker))
-    onChange={[Function]}
-  />
+      <select
+        className="select"
+        onChange={[Function]}
+        value="amount"
+      >
+        <option
+          value="date"
+        >
+          Date
+        </option>
+        <option
+          value="amount"
+        >
+          Amount
+        </option>
+      </select>
+    </div>
+    <div
+      className="input-group__item"
+    >
+      <withLocale(defaultProps(DateRangePicker))
+        onChange={[Function]}
+      />
+    </div>
+  </div>
 </div>
 `;
 
 exports[`should render ExpenseListFilters correctly 1`] = `
-<div>
-  <input
-    onChange={[Function]}
-    type="text"
-    value=""
-  />
-  <select
-    onChange={[Function]}
-    value="date"
+<div
+  className="content-container"
+>
+  <div
+    className="input-group"
   >
-    <option
-      value="date"
+    <div
+      className="input-group__item"
     >
-      Date
-    </option>
-    <option
-      value="amount"
+      <input
+        className="text-input"
+        onChange={[Function]}
+        placeholder="Search Expenses"
+        type="text"
+        value=""
+      />
+    </div>
+    <div
+      className="input-group__item"
     >
-      Amount
-    </option>
-  </select>
-  <withLocale(defaultProps(DateRangePicker))
-    onChange={[Function]}
-  />
+      <select
+        className="select"
+        onChange={[Function]}
+        value="date"
+      >
+        <option
+          value="date"
+        >
+          Date
+        </option>
+        <option
+          value="amount"
+        >
+          Amount
+        </option>
+      </select>
+    </div>
+    <div
+      className="input-group__item"
+    >
+      <withLocale(defaultProps(DateRangePicker))
+        onChange={[Function]}
+      />
+    </div>
+  </div>
 </div>
 `;

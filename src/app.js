@@ -8,7 +8,7 @@ import { login, logout } from "./actions/auth";
 import "rsuite/dist/styles/rsuite-default.css";
 import "normalize.css/normalize.css";
 import "./styles/styles.scss";
-import "./styles/styles.css";
+import LoadingPage from "./components/LoadingPage";
 import { firebase } from "./firebase/firebase";
 
 const store = configureStore();
@@ -26,14 +26,10 @@ const renderApp = () => {
   }
 };
 
-ReactDOM.render(
-  <div className="spinner"></div>,
-  document.getElementById("app")
-);
+ReactDOM.render(<LoadingPage />, document.getElementById("app"));
 
 firebase.auth().onAuthStateChanged(user => {
   if (user) {
-    console.log(user.uid)
     store.dispatch(login(user.uid));
     store.dispatch(startSetExpenses()).then(() => {
       renderApp();

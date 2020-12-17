@@ -8,6 +8,7 @@ module.exports = env => {
   const isProduction = env === "production";
 
   return {
+    mode: isProduction ? "production" : "development",
     entry: ["@babel/polyfill", "./src/app.js"],
     output: {
       path: path.join(__dirname, "public", "dist"),
@@ -15,6 +16,9 @@ module.exports = env => {
     },
     plugins: [
       new MiniCssExtractPlugin(),
+      new webpack.ProvidePlugin({
+        process: "process/browser"
+      }),
       new webpack.DefinePlugin({
         "process.env.FIREBASE_API_KEY": JSON.stringify(
           process.env.FIREBASE_API_KEY
@@ -52,6 +56,10 @@ module.exports = env => {
         {
           test: /\.s?css$/,
           use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"]
+        },
+        {
+          test: /\.(jpg|png)$/i,
+          loader: "url-loader"
         }
       ]
     },

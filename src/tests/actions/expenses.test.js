@@ -148,7 +148,6 @@ test("should add expense to database and store", done => {
       }
     });
     let emptyArray = [];
-    console.log("uid: ", uid);
     await db
       .collection(`users/${uid}/expenses`)
       .doc(docId)
