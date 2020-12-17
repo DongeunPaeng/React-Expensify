@@ -60,7 +60,7 @@ export default class ExpenseForm extends React.Component {
         description: this.state.description,
         amount: parseInt(this.state.amount),
         createdAt: this.state.createdAt,
-        notes: this.state.note
+        note: this.state.note
       });
     }
   };

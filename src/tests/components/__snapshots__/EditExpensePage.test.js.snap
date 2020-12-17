@@ -25,7 +25,7 @@ exports[`should render EditExpensePage correctly 1`] = `
           "createdAt": -500,
           "description": "card03",
           "id": "003",
-          "notes": "",
+          "note": "",
         }
       }
       onSubmit={[Function]}

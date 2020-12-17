@@ -12,13 +12,13 @@ export const startAddExpense = (expenseData = {}) => {
     const uid = getState().auth.uid;
     const {
       description = "",
-      notes = "",
+      note = "",
       amount = 0,
       createdAt = 0
     } = expenseData;
 
     // ADD EXPENSE TO FIRESTORE
-    const expense = { description, notes, amount, createdAt };
+    const expense = { description, note, amount, createdAt };
 
     await db
       .collection(`users/${uid}/expenses`)

@@ -22,14 +22,14 @@ const expenseData = {
   description: "ADD_TEST",
   amount: 100,
   createdAt: 1000,
-  notes: "Test with test DB"
+  note: "Test with test DB"
 };
 
 beforeEach(async () => {
-  expenses.forEach(({ id, description, amount, createdAt, notes }) => {
+  expenses.forEach(({ id, description, amount, createdAt, note }) => {
     db.collection(`users/${uid}/expenses`)
       .doc(id)
-      .set({ description, amount, createdAt, notes });
+      .set({ description, amount, createdAt, note });
   });
   await db
     .collection(`users/${uid}/expenses`)
@@ -94,11 +94,11 @@ test("should remove expense from database and store", done => {
 });
 
 test("should setup editExpense action object", () => {
-  const action = editExpense("123abc", { notes: "New note value" });
+  const action = editExpense("123abc", { note: "New note value" });
   expect(action).toEqual({
     type: "EDIT_EXPENSE",
     id: "123abc",
-    updates: { notes: "New note value" }
+    updates: { note: "New note value" }
   });
 });
 

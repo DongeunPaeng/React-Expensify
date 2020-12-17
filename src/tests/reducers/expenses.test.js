@@ -28,7 +28,7 @@ test("should add an expense", () => {
   const expense = {
     id: "4",
     description: "tests",
-    notes: "tests",
+    note: "tests",
     amount: 100,
     createdAt: 1000
   };

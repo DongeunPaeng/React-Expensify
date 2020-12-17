@@ -36,7 +36,7 @@ test("should set description on input change", () => {
 });
 
 test("should set note on textarea change", () => {
-  const value = "new notes";
+  const value = "new note";
   const wrapper = shallow(<ExpenseForm />);
   wrapper
     .find("textarea")
@@ -71,7 +71,7 @@ test("should call onSubmit prop for valid form submission", () => {
   expect(onSubmitSpy).toHaveBeenLastCalledWith({
     description: expenses[0].description,
     amount: expenses[0].amount,
-    notes: expenses[0].note || "",
+    note: expenses[0].note || "",
     createdAt: DateTime.fromMillis(expenses[0].createdAt).ts
   });
 });
